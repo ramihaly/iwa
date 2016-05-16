@@ -48,5 +48,21 @@
         {
             WebApiApplication.InteractionsModels.Clear();
         }
+
+        [HttpPut]
+        [Route("api/Interactions/upsert")]
+        public void Upsert([FromBody] InteractionsModel newModel)
+        {
+            var existingModel = WebApiApplication.InteractionsModels.FirstOrDefault(m => m.Id.Equals(newModel.Id));
+            if (existingModel == null)
+            {
+                WebApiApplication.InteractionsModels.Add(newModel);
+            }
+            else
+            {
+                existingModel.Sent = newModel.Sent;
+                existingModel.Delivered = newModel.Delivered;
+            }
+        }
     }
 }
