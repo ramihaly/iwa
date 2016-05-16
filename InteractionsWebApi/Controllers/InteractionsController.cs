@@ -41,5 +41,12 @@
             var modelToRemove = this.Get(id);
             WebApiApplication.InteractionsModels.Remove(modelToRemove);
         }
+
+        [HttpGet]
+        [Route("api/Interactions/reset")]
+        public void Reset()
+        {
+            WebApiApplication.InteractionsModels.Clear();
+        }
     }
 }
